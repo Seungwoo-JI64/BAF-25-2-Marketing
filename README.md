@@ -42,7 +42,7 @@
 깃허브는 100mb이상의 파일은 업로드 하지 못한다. 따라서 lfs서버에 우회하여 업로드 하여야 한다.
 1. `git lfs install`  
 lfs를 설치한다
-2. `git lfs pull`
+2. `git lfs pull`  
 파일을 다운로드 한다  
 <br>
 업로드도 lfs를 통해 진행한다
