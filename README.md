@@ -43,11 +43,10 @@
 1. `git lfs install`  
 lfs를 설치한다
 2. `git lfs pull`  
-처음 clone을 한 이후 이것을 사용하면 전체 대용파일을 다운로드 한다
-특정 파일만 다운받을려면 `git lfs pull --include="경로/파일명.확장자" 또는 "경로/디렉토리명"`
+처음 clone을 했다면 이것을 사용하지 않아도 된다. 그러나 lfs서버에 새로 업로드된것만을 가져오고 싶다면 이것을 사용할 것.
 
 대용량 파일을 로컬에서 깃허브로 업로드할려면  
-3. `git lfs track "경로/파일명.확장자"`  
+3. `git lfs track "경로/파일명.확장자"` (또는 한 종류의 확장자를 전부 업로드 하는 방법도 있지만, 이것은 모든 파일을 대상으로 하므로 주의 필요)  
 4. `git add .gitattributes`  
-5. `git commit -m "커밋메세"`  
-6. `git add .` 이후 commit, push 동일 (add . 해도 괜찮다 - 대용량 파일은 이미 lfs에 인식되었기 때문
+5. `git commit -m "커밋메세지"`  
+6. `git add .` 이후 `commit`, `push` 동일 (add . 해도 괜찮다 - 대용량 파일은 이미 lfs에 인식되었기 때문)
