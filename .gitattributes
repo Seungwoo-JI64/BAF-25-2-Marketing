@@ -6,3 +6,4 @@
 영화관람객크롤링/영화별박스오피스데이터/영화별_박스오피스_데이터.zip filter=lfs diff=lfs merge=lfs -text
 영화관람객크롤링/일별박스오피스데이터/박스오피스_일별분할데이터.zip filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text
