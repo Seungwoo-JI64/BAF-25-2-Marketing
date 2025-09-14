@@ -50,4 +50,4 @@ lfs를 설치한다
 3. `git lfs track "경로/파일명.확장자"`  
 4. `git add .gitattributes`  
 5. `git commit -m "커밋메세"`  
-6. `git add "경로/파일명.확장자"` 이후 commit, push 동일
+6. `git add .` 이후 commit, push 동일 (add . 해도 괜찮다 - 대용량 파일은 이미 lfs에 인식되었기 때문
