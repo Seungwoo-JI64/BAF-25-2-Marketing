@@ -43,6 +43,11 @@
 1. `git lfs install`  
 lfs를 설치한다
 2. `git lfs pull`  
-파일을 다운로드 한다  
-<br>
-업로드도 lfs를 통해 진행한다
+처음 clone을 한 이후 이것을 사용하면 전체 대용파일을 다운로드 한다
+특정 파일만 다운받을려면 `git lfs pull --include="경로/파일명.확장자" 또는 "경로/디렉토리명"`
+
+대용량 파일을 로컬에서 깃허브로 업로드할려면
+3. `git lfs track "경로/파일명.확장자"`
+4. `git add .gitattributes`
+5. `git commit -m "커밋메세"`
+6. `git add "경로/파일명.확장자"` 이후 commit, push 동일
