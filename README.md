@@ -202,9 +202,38 @@ CatBoost와 LightGBM 머신러닝 모델을 사용하여 1만명 미만의 영�
 22. `model/이진분류/이진분류진행.ipynb`  
 `predict`데이터로 1만명, 500만명 이진/다중 분류를 진행한 최종 예측 결과이다.
 
-# IV. 영화 총 상영주차 예측
+# IV. 총 관람객수 예측
+### 10k ~ 5M 영화 관람객수 예측 모델
+23. `final_predict/총관람객_회귀예측.ipynb`  
+`train`과 `test`데이터셋을 시용하여 총 관람객수를 예측하는 회귀모델을 구축한다.  
+- 수치형 독립변수와 종속변수 검정을 통한 변환과 표준화 방법 탐색
+- 회귀예측 - L1, L2 규제, 엘라스틱넷, XGBoost  
+- - 총 관객수가 200만명 이상일 경우 성능이 매우 저하
+- - 이상치와 희소값때문인 줄 알았으나 외부요인에 의한 것으로 판명 (200만명 이상인 영화만 가지로 모델을 만들었으나 같은 결과)
+- - 따라서 집단간 차이 분석을 통해 50만명 이상 과대평가 overestimate된 영화를 찾는 로직 개발 (과소평가된 것은 크게 문제가 없다)
+- `final_predict/ridge_cv_model.joblib` : 최종 예측에 사용될 릿지 모델
+- `final_predict/robust_scaler.joblib` : 최종 예측 데이터에 적용될 로버스트 표준화 모델
+- `final_predict/standard_scaler.joblib` : 최종 예측 데이터에 적용될 기본 표준화 모델
+
+### 최종 예측 - 총 관객수
+24. `final_predict/총관객수_최종_예측.ipynb`  
+25.09.06 기준 2주차 이상 상영중인 영화에 대해 예측 모델 적용  
+`model/model_predict_data.csv`  
+- `1만명 이진분류`를 통해 1만명보다 적게 관람될 영화를 식별 및 제거
+- - `model/이진분류/catboost_model_10k.cbm`
+- `500만명 이진분류`를 통해 500만명 이상 관람될 영화를 식별 및 제거
+- - `model/이진분류/svm_model_5m.joblib`
+- 총 관객수 예측
+- - `final_predict/ridge_cv_model.joblib`
+- 총 관객수 100만명 이상 overestimate 검사  
+23.에선 200만명 이상인 영화에 대해서 진행하였지만, 오차가 50만명 이상이므로 100만명 이상 예측 영화에 대해 적용한다
+- - `Show_Change`가 1.484 이상
+- - `Opening_Ho_Retention`이 0.876 이상
+- - 둘 중 하나라도 해당되면 overestimate -> 해당 영화에 주의 필요 
+
+# V. 총 상영주차 예측
 ### 영화 흥행 유형(패턴)과 총 상영주차 예측을 위한 상관분석
-23. `week_predict/영화흥행유형.ipynb`  
+25. `week_predict/영화흥행유형.ipynb`  
 - 영화 흥행 유형(패턴)생성  
 - FA분석  
 - 영화 흥행 유형(패턴) 집단간 FA점수의 분포 차이 분석
@@ -215,4 +244,4 @@ CatBoost와 LightGBM 머신러닝 모델을 사용하여 1만명 미만의 영�
 - - `week_predict/standard_scaler_FA.pkl` : FA분석에 사용한 표준화 변환 정보 저장 (`predict`데이터 변환 용도)   
 - - `week_predict/FA_model.pkl` : FA변환 정보 저장 (`predict`데이터 변환 용도)  
 
-### 총 상영주차 예측 
+### 치종 예측 - 총 상영주차 
